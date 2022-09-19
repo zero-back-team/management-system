@@ -1,4 +1,4 @@
 rootProject.name = 'management-system'
 include ':modules:member-service'
-include ':modules:account-service'
+include ':modules:payment-service'
 
