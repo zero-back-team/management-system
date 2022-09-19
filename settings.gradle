@@ -2,5 +2,5 @@ rootProject.name = 'management-system'
 include ':modules:member-service'
 include ':modules:payment-service'
 include ':modules:mealkit-service'
-
+include ':modules:common-core'
 
