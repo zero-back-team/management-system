@@ -10,6 +10,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -51,5 +53,8 @@ public class Product {
     private LocalDateTime createdAt;
     @LastModifiedDate
     private LocalDateTime lastUpdatedAt;
+
+    @OneToMany(mappedBy = "product")
+    private List<ProductHashtag> hashtags = new ArrayList<>();
 
 }
