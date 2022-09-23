@@ -46,8 +46,7 @@ public class Product {
     private String deliveryPeriod;
 
     private int discountRate;
-    private double pointRate;
-    private String image;
+//    private String image;
 
     @CreatedDate
     private LocalDateTime createdAt;
