@@ -3,7 +3,7 @@ POST http://localhost:9003/api/products/register
 Content-Type: application/json
 
 {
-  "name": 1,
+  "name": "1",
   "price": -15000,
   "stock": 100,
   "brand": "풀무원",

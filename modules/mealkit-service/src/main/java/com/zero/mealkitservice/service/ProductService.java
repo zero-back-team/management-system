@@ -6,12 +6,15 @@ import com.zero.mealkitservice.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 
 @Service
 @RequiredArgsConstructor
 public class ProductService {
     private final ProductRepository productRepository;
 
+    @Transactional
     public ProductRegisterDto.Response registerProduct(ProductRegisterDto.Request request) {
         Product product = Product.builder()
                 .name(request.getName())
@@ -31,6 +34,7 @@ public class ProductService {
                 .deliveryPeriod(request.getDeliveryPeriod())
                 .discountRate(request.getDiscountRate())
                 .build();
+
         Product savedProduct = productRepository.save(product);
 
         return ProductRegisterDto.Response.builder()
