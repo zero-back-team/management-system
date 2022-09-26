@@ -1,0 +1,22 @@
+###
+POST http://localhost:9003/api/products/register
+Content-Type: application/json
+
+{
+  "name": 1,
+  "price": -15000,
+  "stock": 100,
+  "brand": "풀무원",
+  "calorie": 150,
+  "serving": "1~2",
+  "category": "한",
+  "brief_description": "맛있는 밀키트",
+  "description": "~~~~~",
+  "origin": "국내산",
+  "recipe": "~~~~~~~",
+  "expiration_date": "2022-10-01",
+  "allergy": "~~~",
+  "delivery_info": "~~~",
+  "delivery_period": "",
+  "discount_rate": 5
+}
