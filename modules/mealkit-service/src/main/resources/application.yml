@@ -2,6 +2,9 @@ server:
   port: 9003
 
 spring:
+  profiles:
+    include: aws, default
+
   h2:
     console:
       enabled: true
