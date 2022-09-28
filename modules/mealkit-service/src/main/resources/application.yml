@@ -2,22 +2,28 @@ server:
   port: 9003
 
 spring:
+  profiles:
+    include: aws, default
+
   h2:
     console:
       enabled: true
 
   datasource:
-    url:
+    url: jdbc:h2:mem:mealkitdb
     driver-class-name: org.h2.Driver
     username: sa
     password:
 
   jpa:
+    defer-datasource-initialization: true
+    database-platform: H2
     hibernate:
-      ddl-auto: create
+      ddl-auto: create-drop
     properties:
       hibernate:
         format_sql: true
+        show_sql: true
 
 logging:
   level:
