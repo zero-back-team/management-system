@@ -5,6 +5,8 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.zero.mealkitservice.exception.CustomException;
+import com.zero.mealkitservice.type.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -23,9 +25,14 @@ public class AwsS3Service {
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
 
+    @Value("${cloud.aws.region.static}")
+    private String region;
+
     private final AmazonS3 amazonS3;
 
     public String uploadFile(MultipartFile multipartFile) {
+
+        StringBuilder fileUrl = new StringBuilder();
 
         String fileName = createFileName(multipartFile.getOriginalFilename());
         ObjectMetadata objectMetadata = new ObjectMetadata();
@@ -36,10 +43,13 @@ public class AwsS3Service {
             amazonS3.putObject(new PutObjectRequest(bucket, fileName, inputStream, objectMetadata)
                     .withCannedAcl(CannedAccessControlList.PublicRead));
         } catch (IOException e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "파일 업로드에 실패했습니다.");
+            throw new CustomException(ErrorCode.FILE_UPLOAD_FAILED);
         }
 
-        return fileName;
+        fileUrl.append("https://").append(bucket).append(".s3.")
+          .append(region).append(".amazonaws.com/").append(fileName);
+
+        return fileUrl.toString();
     }
 
     public void deleteFile(String fileName) {
@@ -54,7 +64,7 @@ public class AwsS3Service {
         try {
             return fileName.substring(fileName.lastIndexOf("."));
         } catch (StringIndexOutOfBoundsException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "잘못된 형식의 파일(" + fileName + ") 입니다.");
+            throw new CustomException(ErrorCode.FILE_TYPE_ERROR);
         }
     }
 }

@@ -5,6 +5,7 @@ import com.zero.mealkitservice.dto.ProductRegisterDto;
 import com.zero.mealkitservice.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 
@@ -13,9 +14,13 @@ import javax.transaction.Transactional;
 @RequiredArgsConstructor
 public class ProductService {
     private final ProductRepository productRepository;
+    private final AwsS3Service awsS3Service;
 
     @Transactional
-    public ProductRegisterDto.Response registerProduct(ProductRegisterDto.Request request) {
+    public ProductRegisterDto.Response registerProduct(ProductRegisterDto.Request request,
+                                                       MultipartFile multipartFile) {
+        String fileName = awsS3Service.uploadFile(multipartFile);
+
         Product product = Product.builder()
                 .name(request.getName())
                 .price(request.getPrice())
@@ -33,6 +38,7 @@ public class ProductService {
                 .deliveryInfo(request.getDeliveryInfo())
                 .deliveryPeriod(request.getDeliveryPeriod())
                 .discountRate(request.getDiscountRate())
+                .image(fileName)
                 .build();
 
         Product savedProduct = productRepository.save(product);
