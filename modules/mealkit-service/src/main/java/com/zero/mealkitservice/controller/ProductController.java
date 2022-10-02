@@ -21,4 +21,10 @@ public class ProductController {
 //        return ProductRegisterDto.Response.from()
         return productService.registerProduct(request, multipartFile);
     }
+    //Delete
+    @DeleteMapping("/api/products/{productId}/remove")
+    public Long delete(@PathVariable Long id) {
+        productService.deleteProduct(id);
+        return id;
+    }
 }
