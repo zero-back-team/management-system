@@ -57,4 +57,10 @@ public class ProductService {
                 .name(savedProduct.getName())
                 .build();
     }
+    //Delete Product API
+    @Transactional
+    public void deleteProduct(Long id) {
+        Product product = productRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 상품이 없습니다. id=" + id));
+        productRepository.delete(product);
+    }
 }
