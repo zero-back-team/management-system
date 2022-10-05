@@ -1,8 +1,11 @@
 package com.zero.mealkitservice.service;
 
 import com.zero.mealkitservice.domain.Product;
+import com.zero.mealkitservice.dto.ProductDto;
 import com.zero.mealkitservice.dto.ProductRegisterDto;
+import com.zero.mealkitservice.exception.CustomException;
 import com.zero.mealkitservice.repository.ProductRepository;
+import com.zero.mealkitservice.type.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,6 +18,12 @@ import javax.transaction.Transactional;
 public class ProductService {
     private final ProductRepository productRepository;
     private final AwsS3Service awsS3Service;
+
+    public ProductDto searchProduct(Long productId) {
+
+        return ProductDto.fromEntity(productRepository.findById(productId)
+                .orElseThrow(() -> new CustomException(ErrorCode.PRODUCT_NOT_FOUND)));
+    }
 
     @Transactional
     public ProductRegisterDto.Response registerProduct(ProductRegisterDto.Request request,

@@ -17,6 +17,9 @@ Content-Type: application/json
   "expiration_date": "2022-10-01",
   "allergy": "~~~",
   "delivery_info": "~~~",
-  "delivery_period": "",
+  "delivery_period": "asdf",
   "discount_rate": 5
 }
+
+### 상품 상세 조회
+GET http://localhost:9003/api/products/1

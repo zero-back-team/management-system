@@ -1,0 +1,6 @@
+insert into product(id, name, price, stock, brand, calorie, serving, category, brief_description, description, origin, recipe, expiration_date, allergy, delivery_info, delivery_period, discount_rate, image, created_at, last_updated_at)
+values (1, 'test1', 12000, 10, 'test1', 150, 'test1', 'test1', 'test1', 'test1', 'test1', 'test1', 'test1', 'test1', 'test1', 'test1', 1, 'test1', now(), now());
+insert into product(id, name, price, stock, brand, calorie, serving, category, brief_description, description, origin, recipe, expiration_date, allergy, delivery_info, delivery_period, discount_rate, image, created_at, last_updated_at)
+values (2, 'test2', 12000, 10, 'test2', 150, 'test2', 'test2', 'test2', 'test2', 'test2', 'test2', 'test2', 'test2', 'test2', 'test2', 2, 'test2', now(), now());
+insert into product(id, name, price, stock, brand, calorie, serving, category, brief_description, description, origin, recipe, expiration_date, allergy, delivery_info, delivery_period, discount_rate, image, created_at, last_updated_at)
+values (3, 'test3', 12000, 10, 'test3', 150, 'test3', 'test3', 'test3', 'test3', 'test3', 'test3', 'test3', 'test3', 'test3', 'test3', 3, 'test3', now(), now());
